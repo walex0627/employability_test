@@ -7,10 +7,10 @@ import { Application } from '../applications/entities/application.entity';
 
 @Module({
   imports: [
-    // Importamos las entidades para poder inyectar sus repositorios
+
     TypeOrmModule.forFeature([User, Vacancy, Application]),
   ],
   providers: [SeederService],
-  exports: [SeederService], // Exportamos por si quisieramos invocarlo desde otro lado
+  exports: [SeederService], 
 })
 export class SeedersModule {}

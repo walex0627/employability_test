@@ -28,12 +28,11 @@ export class SeederService implements OnModuleInit {
   }
 
   async seedUsers() {
-    // Evitar duplicados: Si ya hay usuarios, no hacemos nada
+
     if ((await this.userRepository.count()) > 0) return;
 
     const password = await bcrypt.hash('Riwi123!', 10);
     
-    // Crear Admin y Gestor (Obligatorios según PDF)
     await this.userRepository.save([
       { name: 'Super Admin', email: 'admin@riwi.io', password, role: UserRole.ADMIN },
       { name: 'Hiring Manager', email: 'manager@riwi.io', password, role: UserRole.GESTOR },
@@ -59,7 +58,7 @@ export class SeederService implements OnModuleInit {
         maxApplicants: 3,
         isActive: true,
       },
-      // Puedes agregar más aquí...
+
     ]);
     this.logger.log('Vacancies created successfully');
   }
