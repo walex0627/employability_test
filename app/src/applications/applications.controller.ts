@@ -7,9 +7,11 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { ApiKeyGuard } from '../auth/guards/api-key.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
+import { ApiSecurity } from '@nestjs/swagger';
 
 @ApiTags('Applications')
 @ApiBearerAuth()
+@ApiSecurity('x-api-key')
 @UseGuards(AuthGuard('jwt'), ApiKeyGuard, RolesGuard) 
 @Controller('applications')
 export class ApplicationsController {

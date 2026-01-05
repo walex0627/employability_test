@@ -19,7 +19,7 @@ export class Application {
   userId: string;
 
   // Relación: Muchas postulaciones pertenecen a una Vacante
-  @ManyToOne(() => Vacancy, (vacancy) => vacancy.applications, { eager: true })
+  @ManyToOne(() => Vacancy, (vacancy) => vacancy.applications, { eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'vacancyId' })
   vacancy: Vacancy;
 

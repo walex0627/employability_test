@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseUUID
 import { VacanciesService } from './vacancy.service';
 import { CreateVacancyDto } from './dto/create-vacancy.dto';
 import { UpdateVacancyDto } from './dto/update-vacancy.dto';
-import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { ApiKeyGuard } from '../auth/guards/api-key.guard';
@@ -10,8 +10,9 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { UserRole } from '../users/entities/user.entity';
 
 @ApiTags('Vacancies')
-@ApiBearerAuth() // Indica en Swagger que estos endpoints usan JWT
-@UseGuards(AuthGuard('jwt'), ApiKeyGuard, RolesGuard) // Protección Global del controlador
+@ApiBearerAuth()
+@ApiSecurity('x-api-key')
+@UseGuards(AuthGuard('jwt'), ApiKeyGuard, RolesGuard) 
 @Controller('vacancies')
 export class VacanciesController {
   constructor(private readonly vacanciesService: VacanciesService) {}

@@ -24,7 +24,7 @@ async function bootstrap() {
     .setTitle('Riwi Employability API')
     .setDescription('API for managing job vacancies and applications')
     .setVersion('1.0')
-    //.addBearerAuth() // Adds JWT support
+    .addBearerAuth() // Adds JWT support
     .addApiKey({ type: 'apiKey', name: 'x-api-key', in: 'header' }, 'x-api-key') // Adds API Key support 
     .build();
 
