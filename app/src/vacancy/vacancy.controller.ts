@@ -18,7 +18,7 @@ export class VacanciesController {
   constructor(private readonly vacanciesService: VacanciesService) {}
 
   @Post()
-  @Roles(UserRole.GESTOR, UserRole.ADMIN) // Solo Gestores y Admins crean vacantes
+  @Roles(UserRole.GESTOR, UserRole.ADMIN) 
   @ApiOperation({ summary: 'Crear una nueva vacante (Solo Gestor/Admin)' })
   create(@Body() createVacancyDto: CreateVacancyDto) {
     return this.vacanciesService.create(createVacancyDto);
@@ -37,7 +37,7 @@ export class VacanciesController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.GESTOR, UserRole.ADMIN) // Solo Gestores y Admins editan
+  @Roles(UserRole.GESTOR, UserRole.ADMIN) 
   @ApiOperation({ summary: 'Actualizar vacante (Solo Gestor/Admin)' })
   update(
     @Param('id', ParseUUIDPipe) id: string, 
@@ -47,7 +47,7 @@ export class VacanciesController {
   }
 
   @Delete(':id')
-  @Roles(UserRole.ADMIN) // Generalmente solo el Admin debería borrar, o también el Gestor
+  @Roles(UserRole.ADMIN) 
   @ApiOperation({ summary: 'Eliminar vacante (Solo Admin)' })
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.vacanciesService.remove(id);
