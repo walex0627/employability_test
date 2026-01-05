@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: riwi_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./app        # This sets the build root to the 'app' folder
+      dockerfile: Dockerfile
+    container_name: riwi_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env                # Loads variables from the root .env
+    environment:
+      DB_HOST: db           # Crucial: Connects to the 'db' service name
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      JWT_SECRET: ${JWT_SECRET}
+      API_KEY: ${API_KEY}
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
