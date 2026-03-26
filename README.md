@@ -48,14 +48,13 @@ The system handles complex hiring constraints automatically:
 ### 2. Environment Variables
 Create a `.env` file in the root:
 ```env
-DB_HOST=localhost
+DB_HOST=db
 DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=yourpassword
-DB_NAME=employability_db
-
-JWT_SECRET=your_jwt_secret_key
-API_KEY=your_global_x_api_key
+DB_USERNAME=postgres
+DB_PASSWORD=riwi_password
+DB_DATABASE=riwi_jobs
+JWT_SECRET=super_secret_jwt_key
+API_KEY=riwi_master_key_2024
 ```
 
 ### 3. Installation
